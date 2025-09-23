@@ -1,0 +1,34 @@
+# Ignore virtual environments
+venv/
+.env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model / checkpoint files
+*.ckpt
+*.pt
+*.bin
+*.h5
+*.onnx
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Kaggle / Colab
+.kaggle/
+.colab/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Node modules (for frontend)
+frontend/node_modules/
+
+# Build / dist folders
+dist/
+build/
