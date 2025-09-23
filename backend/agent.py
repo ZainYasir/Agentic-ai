@@ -1,5 +1,4 @@
-# backend/agent.py
-from langchain_huggingface import HuggingFacePipeline
+from langchain_community.llms import HuggingFacePipeline
 from models.phi_model import load_phi2
 
 def get_langchain_llm():
