@@ -1,13 +1,18 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
+# backend/models/phi_model.py
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
-MODEL_NAME = "microsoft/phi-2"
+MODEL_NAME = "microsoft/phi-2"   # <-- correct constant name
 
 def load_phi2():
-    tokenizer = AutoTokenizer.from_pretrained(MODE_NAME)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
-        torch_dtype=torch.float16,
-        device_map="auto"
+        device_map="auto",   # will use GPU if available
     )
-    return model, tokenizer
+    pipe = pipeline(
+        "text-generation",
+        model=model,
+        tokenizer=tokenizer,
+        max_new_tokens=200,
+    )
+    return pipe
