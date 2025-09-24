@@ -3,3 +3,6 @@ transformers
 accelerate
 langchain
 langchain-community
+langchain-huggingface
+fastapi
+uvicorn
