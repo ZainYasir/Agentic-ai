@@ -5,7 +5,7 @@ from agent import get_langchain_llm
 
 app = FastAPI()
 
-llm = get_langchain_llm()   # conversation chain with memory
+conversation = get_langchain_llm()   # ConversationChain with memory
 
 class Query(BaseModel):
     question: str
@@ -16,5 +16,6 @@ def root():
 
 @app.post("/ask")
 def ask_question(query: Query):
-    response = llm.predict(query.question)  # memory-aware
-    return {"question": query.question, "answer": response}
+    # New API: use .invoke({"input": ...})
+    response = conversation.invoke({"input": query.question})
+    return {"question": query.question, "answer": response["response"]}
