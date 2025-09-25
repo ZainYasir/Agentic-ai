@@ -3,21 +3,18 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from agent import get_langchain_llm
 
-# init FastAPI
 app = FastAPI()
 
-# load model once
-llm = get_langchain_llm()
+llm = get_langchain_llm()   # conversation chain with memory
 
-# request schema
-class ChatRequest(BaseModel):
-    message: str
+class Query(BaseModel):
+    question: str
 
 @app.get("/")
 def root():
-    return {"message": "Agentic AI Backend is running"}
+    return {"message": "Agentic AI Backend is running with memory"}
 
-@app.post("/chat")
-def chat(request: ChatRequest):
-    response = llm.invoke(request.message)
-    return {"question": request.message, "answer": response}
+@app.post("/ask")
+def ask_question(query: Query):
+    response = llm.predict(query.question)  # memory-aware
+    return {"question": query.question, "answer": response}
