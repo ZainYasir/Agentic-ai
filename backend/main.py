@@ -16,6 +16,6 @@ def root():
 
 @app.post("/ask")
 def ask_question(query: Query):
-    # New API: use .invoke({"input": ...})
     response = conversation.invoke({"input": query.question})
-    return {"question": query.question, "answer": response["response"]}
+    print("DEBUG:", response)   # <-- see structure
+    return {"question": query.question, "answer": str(response)}
