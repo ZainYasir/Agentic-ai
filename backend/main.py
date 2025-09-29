@@ -16,6 +16,9 @@ def root():
 
 @app.post("/ask")
 def ask_question(query: Query):
-    response = conversation.invoke({"input": query.question})
+    response = conversation.invoke(
+        {"input": query.question},
+        config={"configurable": {"session_id": "default"}}
+    )
     print("DEBUG:", response)   # <-- see structure
     return {"question": query.question, "answer": str(response)}

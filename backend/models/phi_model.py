@@ -10,9 +10,14 @@ def load_phi2():
         device_map="auto",   # will use GPU if available
     )
     pipe = pipeline(
-        "text-generation",
-        model=model,
-        tokenizer=tokenizer,
-        max_new_tokens=100,
-    )
-    return pipe
+    "text-generation",
+    model=model,
+    tokenizer=tokenizer,
+    device_map="auto",          # automatically use GPU if available
+    torch_dtype="auto",         # float16 if GPU supports, lighter than float32
+    max_new_tokens=100,         # limit output length
+    temperature=0.7,            # randomness (lower = more deterministic)
+    top_p=0.9,                  # nucleus sampling (lower = safer outputs)
+    repetition_penalty=1.1,     # discourages repeating phrases
+    do_sample=True              # enables sampling (not just greedy)
+)
