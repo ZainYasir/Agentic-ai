@@ -13,6 +13,6 @@ def load_phi2():
         "text-generation",
         model=model,
         tokenizer=tokenizer,
-        max_new_tokens=200,
+        max_new_tokens=100,
     )
     return pipe
